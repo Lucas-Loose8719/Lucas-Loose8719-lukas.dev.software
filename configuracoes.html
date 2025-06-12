@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Configurações</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { background: #181c20; color: #fff; font-family: Arial, sans-serif; margin: 0; }
+        .container { max-width: 400px; margin: 3rem auto; background: #23272b; padding: 2rem; border-radius: 12px; }
+        label { display: block; margin-top: 1rem; }
+        input[type="text"], input[type="password"] { width: 100%; padding: 0.7rem; border: none; border-radius: 6px; margin-bottom: 1rem; background: #2c3136; color: #fff; }
+        button { width: 100%; padding: 0.8rem; background: #00bfae; color: #fff; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
+        button:hover { background: #009e8e; }
+        a { color: #00bfae; text-decoration: none; display: block; text-align: center; margin-top: 1rem; }
+        .success { color: #00e676; text-align: center; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Configurações</h2>
+        <form id="configForm">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome">
+            <label for="senha">Nova Senha</label>
+            <input type="password" id="senha" name="senha" placeholder="Nova senha">
+            <div class="success" id="successMsg" style="display:none;"></div>
+            <button type="submit">Salvar</button>
+        </form>
+        <a href="dashboard.html">← Voltar ao Painel</a>
+    </div>
+    <script>
+        // Protege a página se não estiver logado
+        const loggedUser = JSON.parse(localStorage.getItem('loggedUser') || 'null');
+        if(!loggedUser) {
+            window.location.href = "index.html";
+        }
+        // Preenche o nome se existir
+        document.getElementById('nome').value = loggedUser ? loggedUser.username : '';
+        document.getElementById('configForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let users = JSON.parse(localStorage.getItem('users') || '[]');
+            const nome = document.getElementById('nome').value.trim();
+            const senha = document.getElementById('senha').value.trim();
+            let userIndex = users.findIndex(u => u.username === loggedUser.username && u.password === loggedUser.password);
+            if(userIndex !== -1) {
+                if(nome.length >= 3) users[userIndex].username = nome;
+                if(senha.length >= 6) users[userIndex].password = senha;
+                localStorage.setItem('users', JSON.stringify(users));
+                localStorage.setItem('loggedUser', JSON.stringify(users[userIndex]));
+                document.getElementById('successMsg').textContent = "Dados atualizados!";
+                document.getElementById('successMsg').style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>
