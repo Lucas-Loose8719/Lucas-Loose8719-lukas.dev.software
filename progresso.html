@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Progresso</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #181c20;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            padding: 2rem;
+        }
+        h1 { color: #00bfae; }
+        .modulo {
+            background: #23272b;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        .status { color: #00bfae; font-weight: bold; }
+        .voltar {
+            display: inline-block;
+            margin-bottom: 2rem;
+            background: #00bfae;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .voltar:hover {
+            background: #019d96;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="dashboard.html" class="voltar"><i class="fas fa-arrow-left"></i> Voltar ao Painel</a>
+    <h1>Seu Progresso</h1>
+
+    <div class="modulo">
+        <h2>Módulo 1: Introdução</h2>
+        <p>Status: <span class="status">Concluído</span></p>
+    </div>
+    <div class="modulo">
+        <h2>Módulo 2: Montagem</h2>
+        <p>Status: <span class="status">Em andamento</span></p>
+    </div>
+    <div class="modulo">
+        <h2>Módulo 3: Diagnóstico</h2>
+        <p>Status: <span class="status">Não iniciado</span></p>
+    </div>
+
+</body>
+</html>

@@ -4,40 +4,145 @@
     <meta charset="UTF-8">
     <title>Painel do Aluno - Sala de Aula Digital</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
     <style>
-        body { background: #181c20; color: #fff; font-family: Arial, sans-serif; margin: 0; }
-        .sidebar { width: 220px; background: #23272b; height: 100vh; position: fixed; top: 0; left: 0; padding-top: 2rem; }
-        .sidebar ul { list-style: none; padding: 0; }
-        .sidebar ul li { margin: 1.5rem 0; }
-        .sidebar ul li a { color: #00bfae; text-decoration: none; font-size: 1.1rem; padding: 0.5rem 1.5rem; display: block; }
-        .sidebar ul li a:hover { background: #181c20; border-radius: 6px; }
-        .main-content { margin-left: 240px; padding: 2rem; }
-        h1 { margin-top: 0; }
-        .logout { color: #ff6b6b !important; }
+        :root {
+            --primary: #00bfae;
+            --background: #181c20;
+            --text: #ffffff;
+            --subtext: #aaaaaa;
+            --card-bg: #1f2227;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+        }
+
+        /* Sidebar escondida */
+        .sidebar {
+            display: none;
+        }
+
+        .main-content {
+            margin-left: 0;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--subtext);
+            margin-bottom: 2rem;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+            transition: transform 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            color: var(--primary);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #cccccc;
+        }
+
+        @media screen and (max-width: 768px) {
+            .main-content {
+                padding: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Sidebar oculta -->
     <nav class="sidebar">
         <ul>
-            <li><a href="dashboard.html">Início</a></li>
-            <li><a href="aula-ar.html">Aulas em RA</a></li>
-            <li><a href="configuracoes.html">Configurações</a></li>
-            <li><a href="#" id="logout" class="logout">Sair</a></li>
+            <li><a href="dashboard.html"><i class="fas fa-home"></i> Início</a></li>
+            <li><a href="aula-ar2.html"><i class="fas fa-vr-cardboard"></i> Aulas em RA</a></li>
+            <li><a href="progresso.html"><i class="fas fa-chart-line"></i> Progresso</a></li>
+            <li><a href="perfil.html"><i class="fas fa-user-cog"></i> Perfil</a></li>
+            <li><a href="#" id="logout" class="logout"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
         </ul>
     </nav>
+
     <div class="main-content">
         <h1>Bem-vindo à Sala de Aula Digital</h1>
-        <p>Escolha uma opção no menu para começar sua jornada de manutenção de computadores em realidade aumentada!</p>
+        <p>Escolha uma funcionalidade abaixo para começar:</p>
+
+        <div class="cards">
+            <a class="card" href="aula-ar.html">
+                <h2><i class="fas fa-vr-cardboard"></i> Aulas em RA</h2>
+                <p>Experimente aulas interativas com realidade aumentada.</p>
+            </a>
+
+            <a class="card" href="progresso.html">
+                <h2><i class="fas fa-chart-line"></i> Progresso</h2>
+                <p>Acompanhe seu desempenho nos módulos do curso.</p>
+            </a>
+
+            <a class="card" href="perfil.html">
+                <h2><i class="fas fa-user-cog"></i> Perfil</h2>
+                <p>Gerencie suas informações pessoais e configurações da conta.</p>
+            </a>
+        </div>
     </div>
+
     <script>
-        document.getElementById('logout').onclick = function() {
-            localStorage.removeItem('loggedUser');
-            window.location.href = "index.html";
-        };
-        // Protege a página se não estiver logado
-        if(!localStorage.getItem('loggedUser')) {
+        // Proteção de login
+        if (!localStorage.getItem('loggedUser')) {
             window.location.href = "index.html";
         }
+
+        // Logout funcional (apesar de menu estar oculto)
+        const logoutBtn = document.getElementById('logout');
+        if (logoutBtn) {
+            logoutBtn.onclick = function () {
+                localStorage.removeItem('loggedUser');
+                window.location.href = "index.html";
+            };
+        }
     </script>
+
 </body>
 </html>
